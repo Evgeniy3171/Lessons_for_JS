@@ -18,5 +18,6 @@ console.log('type deposit', typeof deposit);
 console.log('длина addExpenses =', addExpenses.length);
 console.log(`Период равен ${period} месяцев. Цель заработать ${mission} рублей`);
 console.log(addExpenses.toLocaleLowerCase().split(', '));
-const budgetDay = money / 30;
+let budgetDay = money / 30;
+budgetDay = Math.ceil(budgetDay);
 console.log('budgetDay: ', budgetDay);
