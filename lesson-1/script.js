@@ -22,7 +22,7 @@ console.log("Ваш месячный бюджет:", budgetMonth);
 let result = Math.ceil(mission / budgetMonth);
 console.log("Вы сможете накопить ", mission, "за ", result, "месяцев");
 let budgetDay = Math.floor(budgetMonth / 30);
-console.log('budgetDay: ', budgetDay);
+console.log('Ваш бюджет на день: ', budgetDay);
 let a = Math.sign(budgetDay);
 if (a === - 1) {
   console.log('Что-то пошло не так.');
