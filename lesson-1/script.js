@@ -1,23 +1,40 @@
-let money;
-let income;
-let addExpenses;
-let deposit;
-let mission;
-let period;
-alert("Привет мир!");
-console.log("Пробная запись");
-money = 80000;
-income = 0;
-addExpenses = "Кредит, ЖКХ, интернет, бензин, продукты, телефон";
-deposit = true;
+'use strict';
+let money,
+    income,
+    addExpenses,
+    deposit,
+    mission,
+    period;
 mission = 1000000;
 period = 12;
-console.log('type money', typeof money);
-console.log('type income', typeof income);
-console.log('type deposit', typeof deposit);
-console.log('длина addExpenses =', addExpenses.length);
-console.log(`Период равен ${period} месяцев. Цель заработать ${mission} рублей`);
-console.log(addExpenses.toLocaleLowerCase().split(', '));
-let budgetDay = money / 30;
-budgetDay = Math.ceil(budgetDay);
+money = +prompt('Ваш месячный доход');
+console.log('Ваш месячный доход', money);
+addExpenses = prompt('Перечислите возможные расходы за рассчитываемый период через запятую', 'Например: квартплата, проездной, кредит');
+console.log("Ваши возможные расходы за рассчитываемый период: ", addExpenses);
+deposit = confirm('Есть ли у Вас депозит в банке?');
+console.log("deposit:", deposit);
+let expenses1 = prompt('Введите обязательную статью расходов?');
+let amount1 = +prompt('Во сколько это обойдется?');
+let expenses2 = prompt('Введите обязательную статью расходов?');
+let amount2 = +prompt('Во сколько это обойдется?');
+let budgetMonth = money - amount1 - amount2;
+console.log("Ваш месячный бюджет:", budgetMonth);
+let result = Math.ceil(mission / budgetMonth);
+console.log("Вы сможете накопить ", mission, "за ", result, "месяцев");
+let budgetDay = Math.floor(budgetMonth / 30);
 console.log('budgetDay: ', budgetDay);
+let a = Math.sign(budgetDay);
+if (a === - 1) {
+  console.log('Что-то пошло не так.');
+}
+if (budgetDay >= 1200) {
+  console.log('У Вас высокий уровень дохода.');
+}
+if (budgetDay < 1200) {
+  if (budgetDay >= 600) {
+  console.log('У Вас средний уровень дохода.');
+}}
+if (budgetDay < 600) {
+  if (budgetDay >= 0) {
+  console.log('К сожалению, у Вас доход ниже среднего.');
+}}
