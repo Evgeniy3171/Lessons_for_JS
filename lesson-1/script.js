@@ -70,12 +70,10 @@ function getStatusIncome() {
     console.log('У Вас высокий уровень дохода.');
   }
   if (budgetDay >=600 && budgetDay <1200) {
-    /* if (budgetDay >= 600) { */
     console.log('У Вас средний уровень дохода.');
-  /* } */}
-  if (budgetDay < 600) {
-    if (budgetDay >= 0) {
-    console.log('К сожалению, у Вас доход ниже среднего.');
-  }}
+  }
+  if (budgetDay >= 0 && budgetDay < 600) {
+   console.log('К сожалению, у Вас доход ниже среднего.');
+  }
 }
 getStatusIncome()
