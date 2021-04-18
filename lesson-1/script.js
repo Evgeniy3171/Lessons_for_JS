@@ -29,8 +29,6 @@ let start = document.getElementById('start'),
     targetAmount = document.querySelector('.target-amount'),
     incomeItems = document.querySelectorAll('.income-items');
 
-//console.log(incomePlus);
-
 let appData = {
  budget: 0,
  income: {},
@@ -45,12 +43,7 @@ let appData = {
  percentDeposit: 0,
  moneyDeposit: 0,
  start: function(){
-    /* if (salaryAmount.value === ''){
-      alert('Ошибка, поле "Месчный доход" должно быть заполнено!');
-      return;
-    } */
     appData.budget = +salaryAmount.value;
-
     appData.getExpenses();
     appData.getIncome();
     appData.getExpensesMonth();
@@ -58,8 +51,6 @@ let appData = {
     appData.getAddIncome();
     appData.getBudget();
     appData.showResult();
-    
-    //appData.getTargetMonth();
  },
  showResult: function(){
     budgetMonthValue.value = appData.budgetMonth;
@@ -68,6 +59,7 @@ let appData = {
     additionalExpensesValue.value = appData.addExpenses.join(', ');
     additionalIncomeValue.value = appData.addIncome.join(', ');
     targetMonthValue.value = Math.ceil(appData.getTargetMonth());
+    incomePeriodValue.value = appData.calcPeriod();
     periodSelect.addEventListener('input', function(){
       return incomePeriodValue.value = appData.calcPeriod();
     });
@@ -169,24 +161,17 @@ let appData = {
 }
 };
 
-//start.addEventListener('click', appData.start);
 
-/* document.addEventListener("DOMContentLoaded", function(){
-  if (salaryAmount.value === '' || salaryAmount.value === null){
-    start.removeAttribute("disabled", "false");
-  }
-  return appData.start();
-});  */
-
-start.addEventListener('click', function(){
-  if (salaryAmount.value === '' || salaryAmount.value === null){
-    //start.removeAttribute("disabled", "true");
-    //start.style.display = 'none';
-    start.disabled = true;
+start.disabled = true;
+salaryAmount.addEventListener('input', function(){
+  if (salaryAmount.value !== ''){
+    start.disabled = false;
   } else {
-    return appData.start();
+    start.disabled = true;
   }
 });
+
+start.addEventListener('click', appData.start);
 
 expensesPlus.addEventListener('click', appData.addExpensesBlock);
 
@@ -195,25 +180,3 @@ incomePlus.addEventListener('click', appData.addIncomeBlock);
 periodSelect.addEventListener('input', function(){
   return periodAmount.textContent = periodSelect.value;
 });
-
-
-
-/* let a = Math.sign(appData.period);
-if (a === - 1){
-  console.log('Цель не будет достигнута.');
-} else {
-   console.log("Вы сможете достичь цели накопления за: " + appData.period + " месяцев");
-}; */
-
-//appData.getStatusIncome();
-
-/* console.log('Наша программа включает в себя данные: ');
-for (let key in appData){
- console.log('Ключ: ' + '"' + key + '"' + ' имеет значение: ' + appData[key]);
-};
-
-for (let i = 0; i < appData.addExpenses.length; i++){
-  appData.addExpenses[i] = appData.addExpenses[i].trim();
-  appData.addExpenses[i] = appData.addExpenses[i][0].toUpperCase() + appData.addExpenses[i].substr(1);
-};
-console.log('Ваши возможные расходы: ' + appData.addExpenses.join(', ')); */
