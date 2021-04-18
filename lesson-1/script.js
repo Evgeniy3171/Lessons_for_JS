@@ -45,10 +45,10 @@ let appData = {
  percentDeposit: 0,
  moneyDeposit: 0,
  start: function(){
-    if (salaryAmount.value === ''){
+    /* if (salaryAmount.value === ''){
       alert('Ошибка, поле "Месчный доход" должно быть заполнено!');
       return;
-    }
+    } */
     appData.budget = +salaryAmount.value;
 
     appData.getExpenses();
@@ -68,7 +68,9 @@ let appData = {
     additionalExpensesValue.value = appData.addExpenses.join(', ');
     additionalIncomeValue.value = appData.addIncome.join(', ');
     targetMonthValue.value = Math.ceil(appData.getTargetMonth());
-    incomePeriodValue.value = appData.calcPeriod();
+    periodSelect.addEventListener('input', function(){
+      return incomePeriodValue.value = appData.calcPeriod();
+    });
  },
  addExpensesBlock: function(){
     let cloneExpensesItem = expensesItems[0].cloneNode(true);
@@ -167,7 +169,24 @@ let appData = {
 }
 };
 
-start.addEventListener('click', appData.start);
+//start.addEventListener('click', appData.start);
+
+/* document.addEventListener("DOMContentLoaded", function(){
+  if (salaryAmount.value === '' || salaryAmount.value === null){
+    start.removeAttribute("disabled", "false");
+  }
+  return appData.start();
+});  */
+
+start.addEventListener('click', function(){
+  if (salaryAmount.value === '' || salaryAmount.value === null){
+    //start.removeAttribute("disabled", "true");
+    //start.style.display = 'none';
+    start.disabled = true;
+  } else {
+    return appData.start();
+  }
+});
 
 expensesPlus.addEventListener('click', appData.addExpensesBlock);
 
@@ -198,5 +217,3 @@ for (let i = 0; i < appData.addExpenses.length; i++){
   appData.addExpenses[i] = appData.addExpenses[i][0].toUpperCase() + appData.addExpenses[i].substr(1);
 };
 console.log('Ваши возможные расходы: ' + appData.addExpenses.join(', ')); */
-
-// 08.36
