@@ -76,6 +76,7 @@ let appData = {
     this.expensesMonth = 0;
     this.percentDeposit = 0;
     this.moneyDeposit = 0;
+    depositCheck.checked = false;
  },
  showResult: function(){
     budgetMonthValue.value = this.budgetMonth;
