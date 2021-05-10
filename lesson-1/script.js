@@ -1,14 +1,16 @@
 'use strict';
 
-/* Это задание относится к нашему приложению "Budget".
-1) Переписать наше приложение в ООП стиле, создать Класс (в старом формате использовать es6 не нужно)
-2) Создать новый метод в классе, например eventsListeners.
-3) Перенести все действия, которые остались за классом внутрь него.
-4) Проверить чтобы все работало без ошибок
-5) Добавить папку с уроком на свой GitHub */
+/*
+    Задания по уроку №15
+*/
 
+/*
+1) Привести проект в соответствии с новым стандартом.
+2) В нашем проекте "Budget" переделать класс под новый формат с помощью ключевого 
+слова Class и Constuctor()
+3) Переменные, существующие только с неизменяемым параметром, объявить через const
+*/
 
-//Получаем элементы страницы
 const start = document.getElementById('start'),
     btnPlus = document.getElementsByTagName('button'),
     incomePlus = btnPlus[0], // + Дополнительный доход
@@ -30,20 +32,22 @@ const start = document.getElementById('start'),
 let expensesItems = document.querySelectorAll('.expenses-items'), // Возможные расходы
     incomeItems = document.querySelectorAll('.income-items'); // Дополнительный доход
 
-const AppData = function () {
-    this.budget = 0;
-    this.budgetDay = 0;
-    this.budgetMonth = 0;
-    this.income = {};
-    this.incomeMonth = 0;
-    this.addIncome = [];
-    this.expenses = {};
-    this.expensesMonth = 0;
-    this.addExpenses = [];
-    this.deposit = false;
-    this.precentDeposit = 0;
-    this.moneyDeposit = 0;
-};
+class AppData {
+    constructor() {
+        this.budget = 0;
+        this.budgetDay = 0;
+        this.budgetMonth = 0;
+        this.income = {};
+        this.incomeMonth = 0;
+        this.addIncome = [];
+        this.expenses = {};
+        this.expensesMonth = 0;
+        this.addExpenses = [];
+        this.deposit = false;
+        this.precentDeposit = 0;
+        this.moneyDeposit = 0;
+    }
+}
 
 AppData.prototype.start = function () {
     if (start.textContent === 'Рассчитать') {
@@ -234,7 +238,7 @@ AppData.prototype.blockStart = function () {
 
 AppData.prototype.check = function () {
     let tmpValue = event.target.value.trim();
-    let target = event.target;
+    const target = event.target;
 
     const changeInputNumber = event => {
         let condition = /.+/,
@@ -247,14 +251,14 @@ AppData.prototype.check = function () {
             condition = /^[\d]+$/;
             textAlert = 'Доупускается ввод только цифр!';
         }
-        if (!condition.test(event.target.value.trim()) && event.target.value.trim() !== '') {
+        if (!condition.test(target.value.trim()) && target.value.trim() !== '') {
             alert(textAlert);
-            event.target.value = tmpValue;
-            event.target.removeEventListener('change', changeInputNumber);
+            target.value = tmpValue;
+            target.removeEventListener('change', changeInputNumber);
         }
-        tmpValue = event.target.value.trim();
+        tmpValue = target.value.trim();
     };
-    event.target.addEventListener('change', changeInputNumber);
+    target.addEventListener('change', changeInputNumber);
 };
 
 AppData.prototype.eventsListeners = function () {
@@ -267,14 +271,6 @@ AppData.prototype.eventsListeners = function () {
     document.querySelectorAll('.data input').forEach(input => {
         input.addEventListener('focus', this.check);
     });
-    /*     document.querySelectorAll('[placeholder="Наименование"]').forEach(input => {
-            input.addEventListener('focus', this.check);
-            // input.addEventListener('focus', this.addEventChangeText);
-        });
-        document.querySelectorAll('[placeholder="Сумма"]').forEach(input => {
-            input.addEventListener('focus', this.check);
-            // input.addEventListener('focus', this.addEventChangeNumber);
-        }); */
 };
 
 const appData = new AppData();
